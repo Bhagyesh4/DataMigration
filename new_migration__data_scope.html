@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Migration: Data Scope</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "primary-hover": "#0e4bce",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1f2937",
+                        "border-light": "#e5e7eb",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-200">
+<!-- Top Navigation / Header -->
+<header class="sticky top-0 z-50 w-full border-b border-border-light dark:border-border-dark bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-2">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-xl">sync_alt</span>
+</div>
+<span class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">MigrateFlow</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-lg">help</span>
+<span>Help Center</span>
+</div>
+<div class="h-8 w-8 overflow-hidden rounded-full border border-border-light dark:border-border-dark bg-slate-100 dark:bg-slate-800">
+<img alt="User Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrTNCgee1Wlqm9q9sV0OYSEVsNipCLWdZFzIx2jhDH6VolIcysersVmS1Os7ek5iS8V9Z_j_StscLtJqCo12_Bz1MZZ9GgbdaHP9YsX2_3S2Dw39-6ZRMYujFEAOqmTJ-yJ2t_DSMKTArfWtc5u_kmhwg03X5HLvuwQjZPle0I8IbEqIAWUy5SzfR_q39OC7ba5YRj7FhTz8zK3VHZ05SQ7Ok73TQEG52EZAueVOxuaQuMcDJdk5urqxvKf4ahrBGWF2AfiwSBVxqr"/>
+</div>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+<!-- Wizard Stepper -->
+<nav aria-label="Progress" class="mb-12">
+<ol class="flex items-center justify-center w-full" role="list">
+<!-- Step 1: Completed -->
+<li class="relative pr-8 sm:pr-20">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="h-0.5 w-full bg-primary"></div>
+</div>
+<a class="relative flex h-8 w-8 items-center justify-center rounded-full bg-primary hover:bg-primary-hover" href="#">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</a>
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-primary whitespace-nowrap">Source</span>
+</li>
+<!-- Step 2: Completed -->
+<li class="relative px-8 sm:px-20">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="h-0.5 w-full bg-primary"></div>
+</div>
+<a class="relative flex h-8 w-8 items-center justify-center rounded-full bg-primary hover:bg-primary-hover" href="#">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</a>
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-primary whitespace-nowrap">Destination</span>
+</li>
+<!-- Step 3: Current -->
+<li class="relative px-8 sm:px-20">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="h-0.5 w-full bg-border-light dark:bg-border-dark"></div>
+<div class="absolute left-0 h-0.5 w-1/2 bg-primary"></div> <!-- Partial fill for entering step -->
+</div>
+<a aria-current="step" class="relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-surface-light dark:bg-surface-dark" href="#">
+<span class="h-2.5 w-2.5 rounded-full bg-primary"></span>
+</a>
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-primary whitespace-nowrap">Data Scope</span>
+</li>
+<!-- Step 4: Upcoming -->
+<li class="relative pl-8 sm:pl-20">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="h-0.5 w-full bg-transparent"></div>
+</div>
+<a class="group relative flex h-8 w-8 items-center justify-center rounded-full border-2 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark hover:border-slate-400" href="#">
+<span class="h-2.5 w-2.5 rounded-full bg-transparent group-hover:bg-slate-300 dark:group-hover:bg-slate-600"></span>
+</a>
+<span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">Review</span>
+</li>
+</ol>
+</nav>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+<!-- Left Column: Selection Area -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Page Header -->
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Select Data to Migrate</h1>
+<p class="mt-2 text-base text-slate-500 dark:text-slate-400">
+                        Choose the accounting modules you wish to transfer from <strong>Xero</strong> to <strong>QuickBooks Online</strong>. 
+                        We automatically map dependencies to ensure data integrity.
+                    </p>
+</div>
+<!-- Global Select Bar -->
+<div class="flex items-center justify-between rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-4 py-3 shadow-sm">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800" type="checkbox"/>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Select All Modules</span>
+</label>
+<span class="text-sm text-slate-500 dark:text-slate-400">5 of 8 selected</span>
+</div>
+<!-- Data Modules List -->
+<div class="space-y-3">
+<!-- Item 1 -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-primary bg-primary/5 p-4 shadow-sm transition-all hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10">
+<div class="flex h-6 items-center">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-light dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Chart of Accounts</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Foundation for all transactions</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-800 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~150 records
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 2 -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-primary bg-primary/5 p-4 shadow-sm transition-all hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10">
+<div class="flex h-6 items-center">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-light dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Contacts / Customers</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Required for Invoices</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-800 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~4,300 records
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 3 -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-border-light bg-surface-light p-4 shadow-sm transition-all hover:bg-gray-50 dark:border-border-dark dark:bg-surface-dark dark:hover:bg-gray-800">
+<div class="flex h-6 items-center">
+<input class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700 text-slate-500 dark:text-slate-300">
+<span class="material-symbols-outlined">store</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Vendors / Suppliers</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Required for Bills</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-700 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~210 records
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 4: With Dependency Alert -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-primary bg-primary/5 p-4 shadow-sm transition-all hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10">
+<div class="flex h-6 items-center">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-light dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Invoices</h3>
+<span class="hidden sm:inline-flex items-center gap-1 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+<span class="material-symbols-outlined text-[10px]">link</span> Dependent
+                                        </span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Includes historical invoices</p>
+</div>
+</div>
+<div class="flex flex-col sm:items-end gap-1">
+<span class="inline-flex w-fit items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-800 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~12,500 records
+                                </span>
+<span class="text-[10px] text-primary dark:text-blue-400 font-medium">+ Includes Customers</span>
+</div>
+</div>
+</label>
+<!-- Item 5: Disabled Zero State -->
+<label class="group relative flex cursor-not-allowed items-start gap-4 rounded-xl border border-border-light bg-gray-50 p-4 opacity-60 dark:border-border-dark dark:bg-gray-900/50">
+<div class="flex h-6 items-center">
+<input class="h-5 w-5 rounded border-gray-300 text-gray-400 focus:ring-0 dark:border-gray-600 dark:bg-gray-800" disabled="" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-400">
+<span class="material-symbols-outlined">book</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-500 dark:text-slate-400">Journal Entries</h3>
+<p class="text-xs text-slate-400 dark:text-slate-500">No records found in source</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-transparent px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-300 dark:text-slate-500 dark:ring-slate-600">
+                                    0 records
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 6: With Warning -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-primary bg-primary/5 p-4 shadow-sm transition-all hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10">
+<div class="flex h-6 items-center">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-light dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Payments</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Matched and unmatched</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-800 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~11,200 records
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 7 -->
+<label class="group relative flex cursor-pointer items-start gap-4 rounded-xl border border-primary bg-primary/5 p-4 shadow-sm transition-all hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10">
+<div class="flex h-6 items-center">
+<input checked="" class="h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary dark:border-gray-600 dark:bg-gray-700" type="checkbox"/>
+</div>
+<div class="flex flex-1 flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-light dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="text-base font-semibold text-slate-900 dark:text-white">Credit Notes</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Credit allocations</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center rounded-md bg-white px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10 dark:bg-gray-800 dark:text-slate-300 dark:ring-slate-400/20">
+                                    ~50 records
+                                </span>
+</div>
+</div>
+</label>
+</div>
+<!-- Info Alert -->
+<div class="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900/30 dark:bg-blue-900/10">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<div class="text-sm text-slate-700 dark:text-slate-300">
+<p class="font-medium">Automatic Dependencies</p>
+<p class="mt-1 opacity-90">To maintain data integrity, selecting transactional records (like Invoices or Bills) will automatically include their master records (Customers or Vendors).</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Actions -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<!-- Summary Card -->
+<div class="rounded-2xl border border-border-light bg-surface-light p-6 shadow-sm dark:border-border-dark dark:bg-surface-dark">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Migration Summary</h2>
+<div class="mt-6 space-y-6">
+<!-- Stat 1 -->
+<div class="flex justify-between items-center pb-4 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-lg">format_list_numbered</span>
+<span class="text-sm font-medium">Total Records</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-white">28,900</span>
+</div>
+<!-- Stat 2 -->
+<div class="flex justify-between items-center pb-4 border-b border-border-light dark:border-border-dark">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span class="text-sm font-medium">Est. Time</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-white">~45 mins</span>
+</div>
+<!-- Stat 3 -->
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-lg">database</span>
+<span class="text-sm font-medium">Data Size</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-white">1.2 GB</span>
+</div>
+</div>
+<!-- Progress Bar Visual -->
+<div class="mt-6">
+<div class="flex justify-between text-xs mb-2">
+<span class="text-slate-500">Storage Usage</span>
+<span class="text-primary font-medium">12%</span>
+</div>
+<div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
+<div class="h-full w-[12%] rounded-full bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3">
+<button class="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors" type="button">
+                            Continue to Review
+                            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<button class="w-full inline-flex justify-center items-center gap-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-gray-800 px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" type="button">
+                            Go Back
+                        </button>
+</div>
+<div class="text-center">
+<a class="text-xs text-slate-400 hover:text-primary transition-colors" href="#">Save progress &amp; exit</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

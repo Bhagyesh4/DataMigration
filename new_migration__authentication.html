@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Migration: Authentication</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2230",
+                        "border-light": "#e7ebf3",
+                        "border-dark": "#2a3441",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d121b] dark:text-white transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-10 py-3 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Migration Dashboard</h2>
+</div>
+<div class="flex items-center gap-8">
+<button class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Help Center</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-white dark:ring-surface-dark shadow-sm" data-alt="User profile avatar showing a smiling professional" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZ8XuSEX5lrBNv0GnrhWdzW2r9ErSi2K2Ss_Sj3I4i8myg_BQB7NRVIKAs04ID0EisLIHmboMp3ga8NE-WQEhPH0fa566r10SDtCXdG0L-y_75OwZEy2tucXs91hOOQNbflDWmjFQ3ElPxeF1jDSb1ZeP_RF3xf2ABqqlxkGy1ckMrgSGugn7tPZQrsKvezREa3QdmuJX17enf2JjDXsSLPNNL6EJZLgLqr4bBpH14HGtkSoKBBmaiwl7F3lA8wEZw0PnBTkUkfQP5");'></div>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-6 md:px-20 lg:px-40 flex flex-1 justify-center py-10">
+<div class="layout-content-container flex flex-col max-w-[1024px] flex-1">
+<!-- ProgressBar -->
+<div class="flex flex-col gap-3 pb-8">
+<div class="flex gap-6 justify-between items-end">
+<p class="text-sm font-semibold uppercase tracking-wide text-primary">Step 2 of 4</p>
+<span class="text-sm text-slate-500 dark:text-slate-400">Next: Data Mapping</span>
+</div>
+<div class="relative h-2 w-full rounded-full bg-[#cfd7e7] dark:bg-slate-700 overflow-hidden">
+<div class="absolute top-0 left-0 h-full rounded-full bg-primary transition-all duration-500" style="width: 50%;"></div>
+</div>
+</div>
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-6 pb-8 border-b border-border-light dark:border-border-dark">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Connect Your Platforms</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg font-normal leading-normal">
+                                Securely authenticate your source and destination software to begin the transfer.
+                            </p>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary text-sm font-medium h-fit self-start md:self-center">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                            256-bit SSL Secure
+                        </div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
+<!-- COLUMN 1: Source Platform -->
+<div class="flex flex-col gap-4">
+<h2 class="text-xl font-bold tracking-tight">Source Platform</h2>
+<!-- Dropdown -->
+<div class="relative group">
+<label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Select Source Software</label>
+<div class="relative">
+<select class="appearance-none flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d121b] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 pl-4 pr-10 text-base font-normal leading-normal shadow-sm transition-all hover:border-primary/50">
+<option selected="" value="qbd">QuickBooks Desktop</option>
+<option value="qbo">QuickBooks Online</option>
+<option value="xero">Xero</option>
+<option value="sage">Sage Intacct</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Source Card (Connected State) -->
+<div class="flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm overflow-hidden mt-2">
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-white p-1 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<!-- Mock Logo -->
+<div class="w-8 h-8 rounded bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-white font-bold text-xs" data-alt="QuickBooks logo abstract representation">QB</div>
+</div>
+<div>
+<h3 class="font-bold text-lg">QuickBooks Desktop</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">File: company_2023.qbw</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-50 dark:bg-green-900/30 px-2.5 py-1 text-xs font-medium text-green-700 dark:text-green-400 ring-1 ring-inset ring-green-600/20">
+<span class="size-1.5 rounded-full bg-green-600 dark:bg-green-400"></span>
+                                            Connected
+                                        </span>
+</div>
+<div class="rounded-lg bg-slate-50 dark:bg-slate-800/50 p-4 border border-slate-100 dark:border-slate-700">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-slate-400">dns</span>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-medium">Local Connector Agent</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Agent v2.4.1 is active on DESKTOP-8J2K9</p>
+</div>
+</div>
+</div>
+<div class="flex gap-3 mt-2">
+<button class="flex-1 rounded-lg border border-border-light dark:border-border-dark bg-transparent px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-200 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">wifi_tethering</span>
+                                            Test Connection
+                                        </button>
+<button class="rounded-lg border border-transparent px-4 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all" title="Disconnect">
+<span class="material-symbols-outlined text-[20px]">link_off</span>
+</button>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 px-6 py-3 border-t border-border-light dark:border-border-dark flex items-center gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                                    Last synced: 2 minutes ago
+                                </div>
+</div>
+</div>
+<!-- COLUMN 2: Destination Platform -->
+<div class="flex flex-col gap-4">
+<h2 class="text-xl font-bold tracking-tight">Destination Platform</h2>
+<!-- Dropdown -->
+<div class="relative group">
+<label class="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">Select Destination Software</label>
+<div class="relative">
+<select class="appearance-none flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d121b] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 pl-4 pr-10 text-base font-normal leading-normal shadow-sm transition-all hover:border-primary/50">
+<option selected="" value="xero">Xero</option>
+<option value="qbo">QuickBooks Online</option>
+<option value="zoho">Zoho Books</option>
+<option value="sage">Sage Business Cloud</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Destination Card (Not Connected State) -->
+<div class="flex flex-col rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm overflow-hidden mt-2 relative group/card">
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-lg bg-white p-1 border border-slate-100 dark:border-slate-700 shadow-sm flex items-center justify-center">
+<!-- Mock Logo -->
+<div class="w-8 h-8 rounded bg-[#00b7e2] flex items-center justify-center text-white font-bold text-xs" data-alt="Xero logo abstract representation">X</div>
+</div>
+<div>
+<h3 class="font-bold text-lg">Xero</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">OAuth 2.0 Integration</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-600 dark:text-slate-400 ring-1 ring-inset ring-slate-500/10">
+<span class="size-1.5 rounded-full bg-slate-400"></span>
+                                            Not Connected
+                                        </span>
+</div>
+<div class="rounded-lg bg-orange-50 dark:bg-orange-900/10 p-4 border border-orange-100 dark:border-orange-900/30">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-orange-500">warning</span>
+<div class="flex flex-col gap-1">
+<p class="text-sm font-medium text-orange-800 dark:text-orange-200">Authentication Required</p>
+<p class="text-xs text-orange-700/80 dark:text-orange-300/70">Connect to your Xero organization to enable data transfer.</p>
+</div>
+</div>
+</div>
+<div class="flex gap-3 mt-2">
+<button class="flex-1 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">link</span>
+                                            Connect with Xero
+                                        </button>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 px-6 py-3 border-t border-border-light dark:border-border-dark flex items-center justify-between text-xs text-slate-500">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                        Redirects to Xero login
+                                    </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="mt-12 flex items-center justify-between border-t border-border-light dark:border-border-dark pt-8">
+<button class="group flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors">
+<span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
+                            Back
+                        </button>
+<button class="group flex items-center gap-2 rounded-lg bg-slate-200 dark:bg-slate-700 px-8 py-3 text-sm font-semibold text-slate-400 dark:text-slate-500 cursor-not-allowed" disabled="">
+                            Continue to Mapping
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<!-- NOTE: If both were connected, the button above would look like this:
+                        <button class="group flex items-center gap-2 rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:shadow-blue-500/30 transition-all">
+                            Continue to Mapping
+                            <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+                        </button>
+                        -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

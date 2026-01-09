@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Migration: Validation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for cleaner look if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d121b] dark:text-white overflow-x-hidden flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-10 py-3 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#0d121b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">AccountMigrate</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-[#0d121b] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-[#0d121b] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Migrations</a>
+<a class="text-[#0d121b] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Integrations</a>
+<a class="text-[#0d121b] dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+</div>
+<button class="flex items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-[#e7ebf3] dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-[#0d121b] dark:text-white">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 ring-2 ring-white dark:ring-gray-800 shadow-sm" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBj41wJmV75d-2WGGAjFh6bWSTdtvVBTZ91MKm7adEESspgl-Te2UHUp_C79DsXqC15g8AlkY83_cFIxhnfZ5FK-RYhaReXHricKC9GlDe7oWhZ2RLFhjB3LcEVMNja3rHGgHzJr2Zfu-p4pEjOCGVnFy_Ojb0UJX182i0VwYldCI9RrzeyEUtlJivQz23b4iK91IDvEUgS-BA460_YTGqCOWzddGST2zhEghPBoEXAHFQXmwofSDBpOIoNGJ6tTbZMkGehrgL3ucNf");'></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center py-8 px-4 md:px-10 lg:px-40">
+<div class="w-full max-w-[960px] flex flex-col gap-6">
+<!-- Page Heading & Progress -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap justify-between items-end gap-3">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0d121b] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">New Migration: Validation</h1>
+<p class="text-[#4c669a] dark:text-gray-400 text-base font-normal leading-normal">We checked your source data to ensure a smooth transition.</p>
+</div>
+</div>
+<!-- Stepper / Progress Bar -->
+<div class="flex flex-col gap-3">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-[#0d121b] dark:text-white text-sm font-bold uppercase tracking-wider leading-normal text-primary">Step 5: Validation</p>
+<p class="text-[#4c669a] dark:text-gray-400 text-sm font-medium leading-normal">Step 5 of 6</p>
+</div>
+<div class="rounded-full bg-[#cfd7e7] dark:bg-gray-700 h-2 w-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500 ease-out" style="width: 83%;"></div>
+</div>
+</div>
+</div>
+<!-- Validation Status Summary Card -->
+<div class="w-full bg-white dark:bg-[#1a202c] rounded-xl border-l-4 border-l-red-500 border border-gray-200 dark:border-gray-700 shadow-sm p-6 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+<div class="flex gap-4 items-start">
+<div class="flex-shrink-0 size-12 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined text-[28px]">gpp_bad</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-[#0d121b] dark:text-white text-lg font-bold leading-tight">Validation Failed</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm">
+                            We found <span class="font-bold text-red-600 dark:text-red-400">3 critical errors</span> that must be fixed before proceeding. We also found <span class="font-bold text-amber-600 dark:text-amber-400">2 warnings</span>.
+                        </p>
+</div>
+</div>
+<button class="flex-shrink-0 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-[#0d121b] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 font-bold py-2 px-4 rounded-lg text-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    Re-validate Data
+                </button>
+</div>
+<!-- Accordion Lists Container -->
+<div class="flex flex-col gap-8">
+<!-- Critical Errors Section -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 pb-2 border-b border-gray-200 dark:border-gray-700">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">error</span>
+<h2 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight">Critical Errors (3)</h2>
+<span class="px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs font-bold uppercase tracking-wide">Blocking</span>
+</div>
+<!-- Error Item 1 -->
+<div class="group bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-800 transition-all shadow-sm overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-red-500"></div>
+<div>
+<h4 class="text-[#0d121b] dark:text-white font-bold text-base mb-1">Missing Mandatory Fields</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Source field 'Client_Email' is missing in 15 records but required in Target.</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                                        15 Records
+                                    </span>
+</div>
+</div>
+<button class="flex-shrink-0 text-primary hover:text-blue-700 dark:hover:text-blue-400 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                View Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Error Item 2 -->
+<div class="group bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-800 transition-all shadow-sm overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-red-500"></div>
+<div>
+<h4 class="text-[#0d121b] dark:text-white font-bold text-base mb-1">Currency Mismatch</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Transactions in GBP detected but Target entity is set to USD only.</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                                        4 Records
+                                    </span>
+</div>
+</div>
+<button class="flex-shrink-0 text-primary hover:text-blue-700 dark:hover:text-blue-400 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                View Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Error Item 3 -->
+<div class="group bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-800 transition-all shadow-sm overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-red-500"></div>
+<div>
+<h4 class="text-[#0d121b] dark:text-white font-bold text-base mb-1">Unsupported Data Types</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Source column 'Legacy_ID_Blob' cannot be mapped to 'Target_ID' (String).</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                                        12 Records
+                                    </span>
+</div>
+</div>
+<button class="flex-shrink-0 text-primary hover:text-blue-700 dark:hover:text-blue-400 font-semibold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                View Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Warnings Section -->
+<div class="flex flex-col gap-4 mt-4">
+<div class="flex items-center gap-2 pb-2 border-b border-gray-200 dark:border-gray-700">
+<span class="material-symbols-outlined text-amber-500">warning</span>
+<h2 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight">Warnings (2)</h2>
+<span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 text-xs font-bold uppercase tracking-wide">Non-Blocking</span>
+</div>
+<!-- Warning Item 1 -->
+<div class="group bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all shadow-sm overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-amber-500"></div>
+<div>
+<h4 class="text-[#0d121b] dark:text-white font-bold text-base mb-1">Duplicate Records Detected</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Potential duplicates found based on Vendor Name matching.</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                                        5 Potential Duplicates
+                                    </span>
+</div>
+</div>
+<button class="flex-shrink-0 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 font-semibold text-sm flex items-center gap-1">
+                                Review <span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Warning Item 2 -->
+<div class="group bg-white dark:bg-[#1a202c] rounded-lg border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-700 transition-all shadow-sm overflow-hidden">
+<div class="p-5 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+<div class="flex gap-4 items-start">
+<div class="mt-1 size-2 rounded-full bg-amber-500"></div>
+<div>
+<h4 class="text-[#0d121b] dark:text-white font-bold text-base mb-1">Tax Configuration Mismatch</h4>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Target system uses 'VAT_20' as default. Source tax codes mapped to default.</p>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+                                        20 Invoices
+                                    </span>
+</div>
+</div>
+<button class="flex-shrink-0 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 font-semibold text-sm flex items-center gap-1">
+                                Review <span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer to push footer to bottom if content is short, though here it's long enough -->
+<div class="h-10"></div>
+</div>
+</main>
+<!-- Footer Actions -->
+<footer class="sticky bottom-0 z-40 w-full bg-white dark:bg-[#1a202c] border-t border-gray-200 dark:border-gray-700 px-10 py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="max-w-[960px] mx-auto flex items-center justify-between">
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-[#0d121b] dark:text-white text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                Back
+            </button>
+<div class="flex gap-4">
+<button class="hidden sm:flex items-center gap-2 px-6 py-2.5 rounded-lg border border-transparent text-gray-600 dark:text-gray-400 text-sm font-bold hover:text-primary dark:hover:text-primary transition-colors">
+                    Skip Warnings
+                </button>
+<!-- Disabled Primary Button because of critical errors -->
+<div class="relative group/tooltip">
+<button class="flex items-center gap-2 px-8 py-2.5 rounded-lg bg-primary/50 text-white text-sm font-bold cursor-not-allowed opacity-75" disabled="">
+                        Start Migration
+                        <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<!-- Tooltip for disabled state -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                        Fix critical errors to proceed
+                    </div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

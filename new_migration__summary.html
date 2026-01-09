@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Migration Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "primary-dark": "#0e45b5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2233",
+                        "text-main-light": "#0d121b",
+                        "text-main-dark": "#e7ebf3",
+                        "text-sec-light": "#4c669a",
+                        "text-sec-dark": "#94a3b8",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col transition-colors duration-200">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7ebf3] dark:border-b-gray-800 bg-card-light dark:bg-card-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-text-main-light dark:text-text-main-dark">
+<div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-2xl">sync_alt</span>
+</div>
+<h2 class="text-text-main-light dark:text-text-main-dark text-lg font-bold leading-tight tracking-[-0.015em]">DataBridge</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<button class="text-text-sec-light dark:text-text-sec-dark hover:text-primary dark:hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-gray-700 shadow-sm" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCCUXTKcjRHYqtgM8YYMDorFyS7xIbVmCGrZ98F4LGoVI6nJy7xBzFxgED2onja9eBWE_AH8aiPvFT9wzYe0f446gL5K3-mIbYAfjAAaNPBrqZzYnhRSc88VgA2aOkFO9fhovIHKgergeBxh8dGsauIVL6RBcgUbR34LupTsvy8Sfw8MzpN25c1k_-Ty42W5HOb5elCp4GS-fcQyBdff2sT1sYI0oDzZl6OQYtou8VxNSJVkKH1FsaW5c02V8zlxwDQ5x8WMl0HT9nC");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
+<!-- Breadcrumbs (Wizard Stepper) -->
+<nav class="w-full overflow-x-auto pb-2">
+<div class="flex items-center gap-2 text-sm whitespace-nowrap min-w-max">
+<a class="text-primary font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Connect
+                </a>
+<span class="text-text-sec-light dark:text-text-sec-dark material-symbols-outlined text-sm">chevron_right</span>
+<a class="text-primary font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Select Data
+                </a>
+<span class="text-text-sec-light dark:text-text-sec-dark material-symbols-outlined text-sm">chevron_right</span>
+<a class="text-primary font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Configure
+                </a>
+<span class="text-text-sec-light dark:text-text-sec-dark material-symbols-outlined text-sm">chevron_right</span>
+<a class="text-primary font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Mapping
+                </a>
+<span class="text-text-sec-light dark:text-text-sec-dark material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-text-main-light dark:text-text-main-dark font-bold bg-gray-200 dark:bg-gray-800 px-3 py-1 rounded-full">Summary</span>
+</div>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-text-main-light dark:text-text-main-dark text-3xl md:text-4xl font-black leading-tight tracking-tight">Review &amp; Confirm Migration</h1>
+<p class="text-text-sec-light dark:text-text-sec-dark text-base md:text-lg max-w-2xl">Please verify the configuration details below. Once started, the process will run in the background.</p>
+</div>
+<!-- Connection Summary (Source -> Target) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-11 gap-6 items-center">
+<!-- Source Card -->
+<div class="lg:col-span-5 bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-5 flex items-center gap-5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-green-500">upload_file</span>
+</div>
+<div class="size-16 shrink-0 bg-green-50 dark:bg-green-900/20 rounded-lg flex items-center justify-center border border-green-100 dark:border-green-800">
+<img alt="QuickBooks Online Logo" class="w-10 h-10 object-contain" data-alt="QuickBooks Online Logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsU8U450rqwWExwDEO246BE1LtlEZ5R06Dc8F9CBtzyrG9_nDKbUQ5UVYAzM34Ihshsb-ErU9xO0lJEEo8XFy0tQIUK788BPm164k2UhNfwqAXmNyszjGVHwCm2sFsMejOeqRYZ-mvcs92S1VdkNrusa5o-PkDn4Nm5lst2cHEjaIXQL1_vlsI-xuDJ-DKu9WygY9diVXpGdU_AsPsA_mW62x8MJ7zIdaXFdTZFC0BblID2WVirLy_nwejnbJJIAypUhgkydfoV5_Z"/>
+</div>
+<div class="flex flex-col z-10">
+<span class="text-xs font-semibold uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark mb-1">Source System</span>
+<h3 class="text-text-main-light dark:text-text-main-dark text-lg font-bold">QuickBooks Online</h3>
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm">My Company Ltd (US)</p>
+<div class="flex items-center gap-1 mt-2 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Connected
+                    </div>
+</div>
+</div>
+<!-- Direction Indicator (Desktop) -->
+<div class="hidden lg:flex lg:col-span-1 justify-center">
+<div class="size-10 rounded-full bg-white dark:bg-gray-800 shadow-md flex items-center justify-center text-text-sec-light dark:text-text-sec-dark border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined">arrow_forward</span>
+</div>
+</div>
+<!-- Direction Indicator (Mobile) -->
+<div class="flex lg:hidden justify-center -my-2">
+<div class="size-10 rounded-full bg-white dark:bg-gray-800 shadow-md flex items-center justify-center text-text-sec-light dark:text-text-sec-dark border border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined">arrow_downward</span>
+</div>
+</div>
+<!-- Target Card -->
+<div class="lg:col-span-5 bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 p-5 flex items-center gap-5 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-blue-500">download</span>
+</div>
+<div class="size-16 shrink-0 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-center border border-blue-100 dark:border-blue-800">
+<img alt="Xero Logo" class="w-10 h-10 object-contain" data-alt="Xero Accounting Logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKbAnx3xzAMAC2OmBNFmxtoj40NkDb_-egX2Mz8b5mT7i3FtoLqaB22fi6YwQWIA006gfSuXRIv_GBzhCV16UcwMAwLCUbtKJqoFTBX7QOsdfwyLz5yxIuCMo73sp-WkEp7M7R8FvTxtLZ3cTrFtKqkvDoRu4jnmpnbxYNFl0258jrxGXjQIOakjdsnX8G1UC79WuegekKQ2FDzI-FdU6LYZ9-PIDRWc6Gs2iBHtS1c-HT__66kbLacUUbkx31cP1cZRqbLkZUi6R6"/>
+</div>
+<div class="flex flex-col z-10">
+<span class="text-xs font-semibold uppercase tracking-wider text-text-sec-light dark:text-text-sec-dark mb-1">Target System</span>
+<h3 class="text-text-main-light dark:text-text-main-dark text-lg font-bold">Xero</h3>
+<p class="text-text-sec-light dark:text-text-sec-dark text-sm">My Company New (US)</p>
+<div class="flex items-center gap-1 mt-2 text-xs font-medium text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Connected
+                    </div>
+</div>
+</div>
+</div>
+<!-- Details Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Selected Data Modules -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center bg-gray-50/50 dark:bg-gray-800/30">
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">Selected Data Modules</h3>
+<button class="text-primary text-sm font-medium hover:underline">Edit Selection</button>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+<!-- Item -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_box</span>
+<div>
+<p class="text-text-main-light dark:text-text-main-dark font-medium text-sm">Chart of Accounts</p>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs">152 Accounts</p>
+</div>
+</div>
+<!-- Item -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_box</span>
+<div>
+<p class="text-text-main-light dark:text-text-main-dark font-medium text-sm">Contacts</p>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs">845 Customers &amp; Suppliers</p>
+</div>
+</div>
+<!-- Item -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_box</span>
+<div>
+<p class="text-text-main-light dark:text-text-main-dark font-medium text-sm">Invoices &amp; Credit Notes</p>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs">Last 2 Fiscal Years</p>
+</div>
+</div>
+<!-- Item -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_box</span>
+<div>
+<p class="text-text-main-light dark:text-text-main-dark font-medium text-sm">Bills &amp; Vendor Credits</p>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs">Last 2 Fiscal Years</p>
+</div>
+</div>
+<!-- Item -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_box</span>
+<div>
+<p class="text-text-main-light dark:text-text-main-dark font-medium text-sm">Products &amp; Services</p>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs">Inventory &amp; Non-Inventory</p>
+</div>
+</div>
+<!-- Item -->
+<div class="flex items-start gap-3 opacity-50">
+<span class="material-symbols-outlined text-gray-400 dark:text-gray-600 mt-0.5">check_box_outline_blank</span>
+<div>
+<p class="text-gray-500 dark:text-gray-500 font-medium text-sm line-through">Purchase Orders</p>
+<p class="text-gray-400 dark:text-gray-600 text-xs">Not selected</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Warning Banner -->
+<div class="rounded-lg bg-orange-50 dark:bg-orange-900/20 border border-orange-100 dark:border-orange-900/30 p-4 flex gap-4 items-start">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400 shrink-0">warning</span>
+<div class="flex flex-col gap-1">
+<p class="text-orange-900 dark:text-orange-100 text-sm font-bold">Important Note on Multi-Currency</p>
+<p class="text-orange-800 dark:text-orange-200 text-sm leading-relaxed">
+                            Historical exchange rates will be approximated based on the transaction date. Please verify journal entries for any significant currency adjustments post-migration.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Sidebar Estimates -->
+<div class="flex flex-col gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden h-fit">
+<div class="px-6 py-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+<h3 class="text-text-main-light dark:text-text-main-dark font-bold text-base">Job Estimates</h3>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Time -->
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs font-medium uppercase tracking-wider">Est. Duration</p>
+<p class="text-text-main-light dark:text-text-main-dark text-xl font-bold">~15 Mins</p>
+</div>
+</div>
+<div class="w-full h-px bg-gray-100 dark:bg-gray-700"></div>
+<!-- Cost -->
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="text-text-sec-light dark:text-text-sec-dark text-xs font-medium uppercase tracking-wider">Cost</p>
+<p class="text-text-main-light dark:text-text-main-dark text-xl font-bold">1 Credit</p>
+</div>
+</div>
+<div class="w-full h-px bg-gray-100 dark:bg-gray-700"></div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-3 text-center">
+<p class="text-primary text-sm font-medium">Balance after job: <span class="font-bold">4 Credits</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="sticky bottom-0 bg-background-light dark:bg-background-dark/95 backdrop-blur-sm border-t border-gray-200 dark:border-gray-800 py-6 -mx-4 px-4 sm:-mx-8 sm:px-8 mt-4">
+<div class="max-w-[1200px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 text-text-main-light dark:text-text-main-dark font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span> Back
+                </button>
+<div class="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary dark:bg-gray-800 dark:border-gray-600" type="checkbox"/>
+<span class="text-sm text-text-sec-light dark:text-text-sec-dark group-hover:text-text-main-light dark:group-hover:text-text-main-dark transition-colors">I agree to the <a class="text-primary underline" href="#">Terms of Service</a></span>
+</label>
+<button class="w-full sm:w-auto px-8 py-3 rounded-lg bg-primary text-white font-bold shadow-lg shadow-blue-500/20 hover:bg-primary-dark active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                        Start Migration
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
