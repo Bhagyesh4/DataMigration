@@ -11,28 +11,6 @@
 
 <body class="h-screen flex overflow-hidden bg-gray-100">
 
-  <!-- Sidebar -->
-  <aside class="w-64 bg-slate-900 text-white flex flex-col">
-    <div class="p-4 text-xl font-bold border-b border-slate-700">
-      Migration UI
-    </div>
-
-    <nav class="flex-1 p-2 space-y-1 text-sm">
-      <button onclick="loadPage('Dashboard Screen.html')" class="menu-btn">Dashboard</button>
-      <button onclick="loadPage('migration_history.html')" class="menu-btn">Migration History</button>
-      <button onclick="loadPage('migration_execution.html')" class="menu-btn">Migration Execution</button>
-      <button onclick="loadPage('migration_details_view.html')" class="menu-btn">Migration Details</button>
-
-      <div class="pt-4 text-xs uppercase text-slate-400">New Migration</div>
-      <button onclick="loadPage('new_migration__select_systems.html')" class="menu-btn">1. Select Systems</button>
-      <button onclick="loadPage('new_migration__authentication.html')" class="menu-btn">2. Authentication</button>
-      <button onclick="loadPage('new_migration__data_scope.html')" class="menu-btn">3. Data Scope</button>
-      <button onclick="loadPage('new_migration__field_mapping.html')" class="menu-btn">4. Field Mapping</button>
-      <button onclick="loadPage('new_migration__validation.html')" class="menu-btn">5. Validation</button>
-      <button onclick="loadPage('new_migration__summary.html')" class="menu-btn">6. Summary</button>
-    </nav>
-  </aside>
-
   <!-- Main Content -->
   <main class="flex-1 bg-white">
     <iframe
@@ -45,25 +23,20 @@
   <!-- JS -->
   <script>
     function loadPage(page) {
-      document.getElementById("contentFrame").src = page;
+      if (page === '/new-migration') {
+        document.getElementById("contentFrame").src = 'new_migration__select_systems.html';
+      } else {
+        document.getElementById("contentFrame").src = page;
+      }
     }
-  </script>
 
-  <!-- Button Styling -->
-  <style>
-    .menu-btn {
-      width: 100%;
-      text-align: left;
-      padding: 10px 12px;
-      border-radius: 6px;
-      background: transparent;
-      color: #cbd5f5;
-    }
-    .menu-btn:hover {
-      background: #1e293b;
-      color: white;
-    }
-  </style>
+    // Listen for messages from the iframe
+    window.addEventListener('message', function(event) {
+      if (event.data === 'start-new-migration') {
+        loadPage('/new-migration');
+      }
+    });
+  </script>
 
 </body>
 </html>
